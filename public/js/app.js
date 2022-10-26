@@ -80,7 +80,7 @@ var usuario;
 
 // ===== Codigo de la aplicación
 
-function crearMensajeHTML(mensaje, personaje, lat, lng, foto) {
+function crearMensajeHTML(mensaje, personaje, lat, lng) {
 
     // console.log(mensaje, personaje, lat, lng);
 
@@ -99,12 +99,12 @@ function crearMensajeHTML(mensaje, personaje, lat, lng, foto) {
                 ${ mensaje }
                 `;
     
-    if ( foto ) {
-        content += `
-                <br>
-                <img class="foto-mensaje" src="${ foto }">
-        `;
-    }
+    // if ( foto ) {
+    //     content += `
+    //             <br>
+    //             <img class="foto-mensaje" src="${ foto }">
+    //     `;
+    // }
         
     content += `</div>        
                 <div class="arrow"></div>
@@ -245,7 +245,6 @@ postBtn.on('click', function() {
         user: usuario,
         lat: lat,
         lng: lng,
-        foto: foto
     };
 
 
@@ -260,10 +259,7 @@ postBtn.on('click', function() {
     .then( res => console.log( 'app.js', res ))
     .catch( err => console.log( 'app.js error:', err ));
 
-    camera.apagar();
-    contenedorCamara.addClass('oculto');
-
-    crearMensajeHTML( mensaje, usuario, lat, lng, foto );
+    crearMensajeHTML( mensaje, usuario, lat, lng );
     
     foto = null;
 });
@@ -493,6 +489,9 @@ btnLocation.on('click', () => {
         navigator.geolocation.getCurrentPosition( pos => {
             console.log(pos);
             mostrarMapaModal(pos.coords.latitude, pos.coords.longitude);
+
+            lat = pos.coords.latitude;
+            lng = pos.coords.longitude;
         } )
     }
     
