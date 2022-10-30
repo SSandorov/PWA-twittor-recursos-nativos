@@ -42,6 +42,7 @@ class Camara {
         // renderizamos la imagen dentro del canvas
         context.drawImage(this.videoNode, 0, 0, canvas.width, canvas.height);
 
+        // hay otras maneras mejores de manejar las imágenes, pero esta es muy simple
         this.foto = context.canvas.toDataURL();
 
         // limpiamos

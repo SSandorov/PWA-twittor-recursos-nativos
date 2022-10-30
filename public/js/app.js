@@ -84,7 +84,7 @@ const camara = new Camara( $('#player')[0] ); // con jquery
 
 // ===== Codigo de la aplicación
 
-function crearMensajeHTML(mensaje, personaje, lat, lng) {
+function crearMensajeHTML(mensaje, personaje, lat, lng, foto) {
 
     // console.log(mensaje, personaje, lat, lng);
 
@@ -103,12 +103,12 @@ function crearMensajeHTML(mensaje, personaje, lat, lng) {
                 ${ mensaje }
                 `;
     
-    // if ( foto ) {
-    //     content += `
-    //             <br>
-    //             <img class="foto-mensaje" src="${ foto }">
-    //     `;
-    // }
+    if ( foto ) {
+        content += `
+                <br>
+                <img class="foto-mensaje" src="${ foto }">
+        `;
+    }
         
     content += `</div>        
                 <div class="arrow"></div>
@@ -249,6 +249,7 @@ postBtn.on('click', function() {
         user: usuario,
         lat: lat,
         lng: lng,
+        foto: foto
     };
 
 
@@ -263,7 +264,7 @@ postBtn.on('click', function() {
     .then( res => console.log( 'app.js', res ))
     .catch( err => console.log( 'app.js error:', err ));
 
-    crearMensajeHTML( mensaje, usuario, lat, lng );
+    crearMensajeHTML( mensaje, usuario, lat, lng, foto );
     
     foto = null;
 });
@@ -525,7 +526,7 @@ btnTomarFoto.on('click', () => {
     foto = camara.tomarFoto();
     camara.apagar();
 
-    console.log(foto);
+    // console.log(foto);
     
 });
 
